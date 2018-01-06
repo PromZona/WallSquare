@@ -25,13 +25,17 @@ public class Control : MonoBehaviour {
 	void Update ()
     {
         CurBall.GetComponent<BallMove>().speed += 0.008f;
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 	}
 
     public void AddLeftWallScore()
     {
         Destroy(CurBall);
         LeftWallScore++;
-        Debug.Log(LeftWallScore);
         UpdateScore();
         InitNewGame();
     }
@@ -40,7 +44,6 @@ public class Control : MonoBehaviour {
     {
         Destroy(CurBall);
         RightWallScore++;      
-        Debug.Log(RightWallScore);
         UpdateScore();
         InitNewGame();
     }

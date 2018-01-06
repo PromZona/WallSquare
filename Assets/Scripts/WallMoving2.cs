@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class WallMoving2 : MonoBehaviour {
 
-    public float speed = 0.02f;
+    public float speed;
+    Rigidbody2D rb;
 
     // Use this for initialization
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -20,13 +21,26 @@ public class WallMoving2 : MonoBehaviour {
         if (Input.GetKey(KeyCode.UpArrow))
         {
             Vector3 directionY = transform.up * 1;
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + directionY, speed * Time.deltaTime);
+            rb.velocity = directionY * speed;
         }
-
-        if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             Vector3 directionY = transform.up * -1;
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + directionY, speed * Time.deltaTime);
+            rb.velocity = directionY * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 }

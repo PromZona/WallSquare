@@ -11,18 +11,21 @@ public class BallMove : MonoBehaviour {
     public GameObject RightWall;
 
     bool GOAL = false;
-
+    Rigidbody2D rb;
     Vector3 Direction = new Vector3(-1, 0);
 
 	// Use this for initialization
 	void Start ()
     {
+        rb = GetComponent<Rigidbody2D>();
         Control = FindObjectOfType<Control>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + Direction, speed * Time.deltaTime);
+	void Update ()
+    {
+        rb.velocity = Direction * speed;
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + Direction, speed * Time.deltaTime);
        // Debug.Log(Direction);
     }
 
